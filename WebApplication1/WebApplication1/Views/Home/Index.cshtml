@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h2>Calc service demonstration</h2>
+
+<ul>
+    <li><a asp-controller="RandomNumber" asp-action="CalculateUsingModel">Using Model calc</a></li>
+    <li><a asp-controller="RandomNumber" asp-action="CalculateUsingViewData">Using ViewData calc</a></li>
+    <li><a asp-controller="RandomNumber" asp-action="CalculateUsingViewBag">Using ViewBag calc</a></li>
+    <li><a asp-controller="RandomNumber" asp-action="AccessServiceDirectly">Using Service Injection calc</a></li>
+</ul>

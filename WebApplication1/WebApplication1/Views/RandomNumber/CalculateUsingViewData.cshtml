@@ -1,0 +1,14 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "PassUsingViewData";
+}
+
+<h2>PassUsingViewData</h2>
+<ul>
+    <li>Rand value first: @ViewData["number1"]</li>
+    <li>Rand value second: @ViewData["number2"]</li>
+    <li>@ViewData["number1"] + @ViewData["number2"] = @ViewData["Summ"]</li>
+    <li>@ViewData["number1"] - @ViewData["number2"] = @ViewData["Subtraction"]</li>
+    <li>@ViewData["number1"] * @ViewData["number2"] = @ViewData["Multiplication"]</li>
+    <li>@ViewData["number1"] / @ViewData["number2"] = @ViewData["Division"]</li>
+</ul>

@@ -1,0 +1,23 @@
+﻿@using WebApplication1.Services
+@model dynamic
+@inject ICalculateNumber CalculateNumber
+@inject IRandomNumber RandomNumber
+@{
+    ViewBag.Title = "Access service directly";
+}
+
+<h2>AccessServiceDirectly</h2>
+<dl class="dl-horizontal">
+    @{
+        var number1 = RandomNumber.GetRandomNumber();
+        var number2 = RandomNumber.GetRandomNumber();
+    }
+</dl>
+<ul>
+    <li>Rand value first: @number1</li>
+    <li>Rand value second: @number2</li>
+    <li>@number1 + @number2 = @CalculateNumber.Summ(number1, number2)</li>
+    <li>@number1 - @number2 = @CalculateNumber.Subtraction(number1, number2)</li>
+    <li>@number1 * @number2 = @CalculateNumber.Multiplication(number1, number2)</li>
+    <li>@number1 / @number2 = @CalculateNumber.Division(number1, number2)</li>
+</ul>
