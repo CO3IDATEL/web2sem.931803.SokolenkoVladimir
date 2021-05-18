@@ -1,0 +1,27 @@
+﻿@model WebApplication3.Models.QuizViewModel
+@{
+    ViewData["Title"] = "Hello, my answers!";
+}
+
+<h2>Quiz results</h2>
+
+<p>
+    <strong>Correct answers: </strong> @Model.GuessedCorrect / @Model.expressions.Count
+</p>
+<p>
+    <ol>
+        @for(Int32 i = 0; i < Model.expressions.Count; i++)
+        {
+            if (Model.expressions[i].Result != Model.expressions[i].Expected) 
+            {
+                <li class="text-danger">
+                    @Model.expressions[i].Left @Model.expressions[i].Operator @Model.expressions[i].Right = @Model.expressions[i].Result
+                </li>
+            } else {
+                <li>
+                    @Model.expressions[i].Left @Model.expressions[i].Operator @Model.expressions[i].Right = @Model.expressions[i].Result
+                </li>
+            }
+        }
+    </ol>
+</p>

@@ -1,0 +1,43 @@
+﻿@model WebApplication3.Models.QuizViewModel
+@{ 
+    ViewData["Title"] = "Welcome to my Quiz!";
+}
+
+<h2>Quiz</h2>
+@*<h2>@Model.expressions.Count</h2>*@
+<form asp-action="Index" class="form-horizontal">
+    <div asp-validation-summary="All"></div>
+    @{
+        <input type="hidden" asp-for="@Model.GuessedCorrect" />
+        if(Model.expressions != null) {
+            for (Int32 i = 0; i < Model.expressions.Count; i++)
+            {
+                @Html.HiddenFor(m => m.expressions[i].Left);
+                @Html.HiddenFor(m => m.expressions[i].Right);
+                @Html.HiddenFor(m => m.expressions[i].Expected);
+                @Html.HiddenFor(m => m.expressions[i].Operator);
+                @Html.HiddenFor(m => m.expressions[i].Result);
+            }
+        }
+    }
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            @if(Model.expressions != null){
+                Int32 Len = Model.expressions.Count;
+                if (Len > 0)
+                {
+                    <b>@Model.expressions[Len - 1].Left @Model.expressions[Len - 1].Operator @Model.expressions[Len - 1].Right =  </b>
+                }
+            }
+        </label>
+        <div class="col-md-10">
+            <input class="form-control" type="number" name="answer" value="@ViewData["PreviousUserInput"]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="submit" name="action" value="Next" class="btn-default btn">Sumbit</button>
+            <button type="submit" name="action" value="Finish" class="btn-primary btn">Finish</button>
+        </div>
+    </div>
+</form>
