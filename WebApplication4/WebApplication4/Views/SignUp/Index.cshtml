@@ -1,0 +1,155 @@
+﻿@model WebApplication4.Models.SignUpViewModel
+@{ 
+    ViewData["Title"] = "Sign up";
+}
+
+<h2>Sign Up</h2>
+
+<form class="form-horizontal" asp-action="Index">
+    <div asp-validation-summary="All"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">First name</label>
+        <div class="col-md-10">
+            <input id="First name" asp-for="FirstName" type="text" class="form-control" value="@Model.FirstName" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Second name</label>
+        <div class="col-md-10">
+            <input id="Second name" asp-for="SecondName" type="text" class="form-control" value="@Model.SecondName" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Birthday</label>
+        <div class="col-md-10 form-inline">
+            <select id="Date-Days" class="form-control" asp-for="Day">
+                <option disabled="disabled">Day</option>
+            </select>
+            <select id="Date-Months" class="form-control" asp-for="Month">
+                <option disabled="disabled">Month</option>
+            </select>
+            <select id="Date-Years" class="form-control" asp-for="Year">
+                <option disabled="disabled">Year</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Gender</label>
+        <div class="col-md-10">
+            <div class="radio">
+                <label>
+                    <input asp-for="Gender" name="Gender" type="radio" value="2" />
+                    Male
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input asp-for="Gender" name="Gender" type="radio" value="1" />
+                    Female
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button class="btn btn-primary">Sign up</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    var daysSelection;
+    var monthsSelection;
+    var yearsSelection;
+    const dict = new Map([
+        ["January"  , 31],
+        ["February" , 28],
+        ["March"    , 31],
+        ["April"    , 30],
+        ["May"      , 31],
+        ["June"     , 30],
+        ["July"     , 31],
+        ["August"   , 31],
+        ["September", 30],
+        ["October"  , 31],
+        ["November" , 30],
+        ["December" , 31]
+    ]);
+    document.addEventListener("DOMContentLoaded", () => {
+        daysSelection = document.getElementById("Date-Days");
+        monthsSelection = document.getElementById("Date-Months");
+        yearsSelection = document.getElementById("Date-Years");
+
+        for (var i = new Date().getFullYear(); i > 1919; i--)
+        {
+            var year = document.createElement('option');
+            year.innerText = i;
+            yearsSelection.appendChild(year);
+        }
+        for (var i = 1; i < 32; i++)
+        {
+            var day = document.createElement('option');
+            day.innerText = i;
+            daysSelection.appendChild(day);
+        }
+        var i = 0;
+        dict.forEach((d, m) => {
+            var month = document.createElement('option');
+            month.innerText = m;
+            month.value = i++;
+            monthsSelection.appendChild(month);
+        });
+        monthsSelection.addEventListener('change',
+            () => {
+                var m = Array.from(dict.keys())[monthsSelection.value];
+                if (dict.has(m))
+                {
+                    var days = dict.get(m);
+                    if (yearsSelection.value % 4 == 0
+                        && m == "February") {
+                        days++;
+                    }
+                    setDayInput(days);
+                } 
+            }
+        )
+        yearsSelection.addEventListener('change',
+            () => {
+                var m = Array.from(dict.keys())[monthsSelection.value];
+                if (m == "February") {
+                    if (yearsSelection.value % 4 == 0)
+                        setDayInput(dict.get(m) + 1);
+                    else 
+                        setDayInput(dict.get(m));
+                }
+            }
+        )
+        var [d, m, y] = [@Model.Day, @Model.Month, @Model.Year];
+        if (d != null && m != null && y != null) {
+            [daysSelection.value, monthsSelection.value, yearsSelection.value]
+                = [d, m, y];
+        }
+    });
+    function setDayInput(days)
+    {
+        var dayCount = daysSelection.childElementCount - 1;
+        if (dayCount < days) {
+            for (var i = dayCount + 1; i <= days; i++)
+            {
+                var day = document.createElement('option');
+                day.innerText = i;
+                daysSelection.appendChild(day);
+            }
+        } else if (dayCount > days) {
+            var daySelected = daysSelection.value;
+            if (daySelected > days)
+            {
+                daysSelection.value = days;
+            }
+            for (var i = dayCount - days; i > 0; i--)
+            {
+                daysSelection.removeChild(daysSelection.lastChild);
+            }
+        }
+    }
+</script>

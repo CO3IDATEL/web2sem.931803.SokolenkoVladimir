@@ -1,0 +1,22 @@
+﻿@model WebApplication4.Models.SignUpConfirmViewModel
+@{
+    ViewData["Title"] = "Sign up";
+}
+
+<h2>Sign up result</h2>
+<dl class="dl-horizontal">
+    <dt>First name</dt>
+    <dd>@Model.FirstName</dd>
+    <dt>Last name</dt>
+    <dd>@Model.SecondName</dd>
+    <dt>Birthday</dt>
+    <dd>@Model.DateOfBirth.ToString("MMMM dd yyyy")</dd>
+    <dt>Email</dt>
+    <dd>@Model.Email</dd>
+    <dt>Password</dt>
+    <dd>@Model.Password</dd>
+    <dt>User existed</dt>
+    <dd>@Model.WasFound</dd>
+    <dt>Remembered</dt>
+    <dd>@Model.RememberMe</dd>
+</dl>
