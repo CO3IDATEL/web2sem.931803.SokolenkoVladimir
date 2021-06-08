@@ -2,10 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h2>Form parameters parsing demo</h2>
+<div class="text-left">
+    <h1 class="display-4">Calc Service Demonstration</h1>
+
+</div>
 <ul>
-    <li><a asp-controller="Calculate" asp-action="Manual">Manual parsing in single action</a></li>
-    <li><a asp-controller="Calculate" asp-action="ManualWithSeparateHandlers">Manual parsing in separate actions</a></li>
-    <li><a asp-controller="Calculate" asp-action="ModelBindingInParameters">Model binding (parameters)</a></li>
-    <li><a asp-controller="Calculate" asp-action="ModelBindingInSeparateModel">Model binding (separate model)</a></li>
+    <li><a asp-area="" asp-controller="Calc" asp-action="Manual">Manual parsing in single action</a></li>
+    <li><a asp-area="" asp-controller="Calc" asp-action="ManualWithSeparateHandlers">Manual parsing in separate action</a></li>
+    <li><a asp-area="" asp-controller="Calc" asp-action="ModelBindingsInParametrs">Model bindings(parametrs)</a></li>
+    <li><a asp-area="" asp-controller="Calc" asp-action="ModelBindingsInSeparateModel">Model bindings(separate model)</a></li>
+    <li><a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
 </ul>
